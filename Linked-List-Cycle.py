@@ -1,14 +1,12 @@
 # Definition for singly-linked list.
 # class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
-# // detect cycles in a linked list - two pointer 
-# // Slow Pointer: Moves one step at a time.
-# // Fast Pointer: Moves two steps at a time.
-# // If there is a cycle, the fast pointer will eventually meet the slow pointer. 
-# // This is because the fast pointer, moving faster, will eventually \lap\ the slow pointer if the list contains a cycle.
+#to detect a cycle with a linked list, we can use two pointer
+#slow pointer moves one node at a time, fast pointer moves two nodes at a time.
+#if the two pointer meets, then return true
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
@@ -17,6 +15,6 @@ class Solution:
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            if slow == fast:
-                return True
+            if slow == fast: return True
+
         return False
