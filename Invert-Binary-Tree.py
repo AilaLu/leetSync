@@ -25,9 +25,9 @@ class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         #edge case:
         if not root: return None
+        root.right, root.left = root.left, root.right
         #recursive calls
         self.invertTree(root.left)
         self.invertTree(root.right)
 
-        root.right, root.left = root.left, root.right
         return root
