@@ -4,30 +4,16 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-\\\
-✅ Recursive Approach
-Style: Simpler, more concise code.
 
-Mechanism: Uses the call stack for tree traversal.
-
-Downside: Risk of stack overflow for very deep trees (e.g., skewed trees).
-
-✅ Iterative Approach
-Style: Uses an explicit stack or queue (DFS or BFS).
-
-Mechanism: Manages its own memory, avoiding call stack limits.
-
-Advantage: Safer for deep trees or environments with recursion limits.
-\\\
-
-#recursion
+# 1. base case: if root is None, we return None
+# 2. we swap the values of the children
+# 3. call recursion on the children if they exist 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        #edge case:
-        if not root: return None
-        root.right, root.left = root.left, root.right
-        #recursive calls
-        self.invertTree(root.left)
-        self.invertTree(root.right)
+        if not root: return root
+
+        root.left, root.right = root.right, root.left
+        if root.left: self.invertTree(root.left)
+        if root.right: self.invertTree(root.right)
 
         return root
