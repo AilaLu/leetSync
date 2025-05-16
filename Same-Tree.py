@@ -5,32 +5,17 @@
 #         self.left = left
 #         self.right = right
 
-#edge case if either of the tree is empty
-#iterate through tree p
-#pop the tuple contaning nodes of p and q
-# compare them, return false early if any node isn't the same
-# in the end, return true
-from collections import deque
+# intuition is to recursively call the tree, compare the two node throught the recursion, if not equal return false.
+# if iterate through the entire tree and all comparision return true, return true
 class Solution:
-
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if not p and not q: return True
-        if not p or not q: return False
-
-        queue = deque([(p, q)])
-
-        while queue:
-            print(queue)
-            cur_p, cur_q = queue.popleft()
-            if  cur_p.val != cur_q.val: return False
-
-            if cur_p.left and cur_q.left: queue.append((cur_p.left, cur_q.left)) 
-            #if either has no left child
-            elif cur_p.left or cur_q.left: return False
-            if cur_p.right and cur_q.right: queue.append((cur_p.right, cur_q.right)) 
-            #if either has no right child
-            elif cur_p.right or cur_q.right: return False
-
-
-
-        return True
+        # base case
+        if not p and not q:
+          return True 
+        # if p is null or q is null or they are not the same value
+        if not p or not q:
+            return False
+        if  p.val != q.val:
+            return False
+        # recursive call for the children
+        return  (self.isSameTree(p.right, q.right)) and (self.isSameTree(p.left, q.left))
